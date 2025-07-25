@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Daily Hub</title>
 </head>
 
@@ -16,11 +16,25 @@
         <section class="live-clock">
             <div></div>
         </section>
-        <section class="welcome-message">
-            <h2></h2>
+        <section class="login-form-section">
+            <form id="login-form">
+                <input type="text" placeholder="What is your name?" required />
+                <button>Log In</button>
+            </form>
         </section>
-</body>
+        <section class="welcome-section">
+            <h2 id="greeting"></h2>
+        </section>
+        <section class="todo-section">
+            <form id="todo-form">
+                <input type="text" placeholder="Write a To Do and Press Enter" required />
+            </form>
+            <ul id="todo-list"></ul>
+        </section>
+    </main>
 
-<script src="/main.js"></script>
+    <script src="main.js"></script>
+
+</body>
 
 </html>

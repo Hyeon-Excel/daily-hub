@@ -1,15 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* General-purpose classes */
+.hidden {
+    display: none;
 }
 
+/* Layout */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -20,34 +20,46 @@ header {
     margin-bottom: 20px;
 }
 
-.live-clock {
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+section {
+    text-align: center;
+}
+
+/* #clock-section */
+#clock {
     font-size: 2em;
     font-weight: bold;
-    text-align: center;
 }
 
-.welcome-message {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none;
-}
-
-#login-form input {
+/* #login-section & #greeting-section */
+#login-form input,
+#login-form button {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 #login-form button {
-    padding: 10px 15px;
     border: none;
     background-color: #333;
     color: #fff;
-    border-radius: 5px;
     cursor: pointer;
+}
+
+#greeting {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* #todo-section */
+#todo-section {
+    width: 300px;
 }
 
 #todo-form input {
@@ -55,13 +67,12 @@ header {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #todo-list {
     list-style: none;
     padding: 0;
-    width: 300px; 
     margin-top: 10px;
 }
 

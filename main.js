@@ -1,98 +1,111 @@
-const loginForm = document.querySelector("#login-form");
-const loginInput = document.querySelector("#login-form input");
-const greeting = document.querySelector("#greeting");
+// main.js
 
-const HIDDEN_CLASSNAME = "hidden";
-const USERNAME_KEY = "username";
+// --- Clock ---
+(function () {
+    const clock = document.querySelector('#clock');
 
-function onLoginSubmit(event) {
-    event.preventDefault();
-    loginForm.classList.add(HIDDEN_CLASSNAME);
-    const username = loginInput.value;
-    localStorage.setItem(USERNAME_KEY, username);
-    paintGreetings(username);
-}
+    function updateClock() {
+        const now = new Date();
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        clock.textContent = now.toLocaleTimeString('en-US', options);
+    }
 
-function paintGreetings(username) {
-    greeting.innerText = `Hello ${username}`;
-    greeting.classList.remove(HIDDEN_CLASSNAME);
-}
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call
+})();
 
-const savedUsername = localStorage.getItem(USERNAME_KEY);
+// --- Login ---
+(function () {
+    const loginSection = document.querySelector('#login-section');
+    const loginForm = document.querySelector('#login-form');
+    const loginInput = loginForm.querySelector('input');
+    const greetingSection = document.querySelector('#greeting-section');
+    const greeting = greetingSection.querySelector('#greeting');
 
-if (savedUsername === null) {
-    loginForm.classList.remove(HIDDEN_CLASSNAME);
-    loginForm.addEventListener("submit", onLoginSubmit);
-} else {
-    paintGreetings(savedUsername);
-}
+    const HIDDEN_CLASSNAME = 'hidden';
+    const USERNAME_KEY = 'username';
 
-const toDoForm = document.getElementById("todo-form");
-const toDoInput = document.querySelector("#todo-form input");
-const toDoList = document.getElementById("todo-list");
+    function onLoginSubmit(event) {
+        event.preventDefault();
+        loginSection.classList.add(HIDDEN_CLASSNAME);
+        const username = loginInput.value;
+        localStorage.setItem(USERNAME_KEY, username);
+        paintGreetings(username);
+    }
 
-const TODOS_KEY = "todos";
+    function paintGreetings(username) {
+        greeting.innerText = `Hello ${username}`;
+        greetingSection.classList.remove(HIDDEN_CLASSNAME);
+    }
 
-let toDos = [];
+    const savedUsername = localStorage.getItem(USERNAME_KEY);
 
-function saveToDos() {
-    localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
-}
+    if (savedUsername === null) {
+        loginSection.classList.remove(HIDDEN_CLASSNAME);
+        loginForm.addEventListener('submit', onLoginSubmit);
+    } else {
+        paintGreetings(savedUsername);
+    }
+})();
 
-function deleteToDo(event) {
-    const li = event.target.parentElement;
-    li.remove();
-    toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
-    saveToDos();
-}
+// --- To-Do List ---
+(function () {
+    const toDoForm = document.getElementById('todo-form');
+    const toDoInput = toDoForm.querySelector('input');
+    const toDoList = document.getElementById('todo-list');
 
-function paintToDo(newTodo) {
-    const li = document.createElement("li");
-    li.id = newTodo.id;
-    const span = document.createElement("span");
-    span.innerText = newTodo.text;
-    const button = document.createElement("button");
-    button.innerText = "❌";
-    button.addEventListener("click", deleteToDo);
-    li.appendChild(span);
-    li.appendChild(button);
-    toDoList.appendChild(li);
-}
+    const TODOS_KEY = 'todos';
+    let toDos = [];
 
-function handleToDoSubmit(event) {
-    event.preventDefault();
-    const newTodo = toDoInput.value;
-    toDoInput.value = "";
-    const newTodoObj = {
-        text: newTodo,
-        id: Date.now(),
-    };
-    toDos.push(newTodoObj);
-    paintToDo(newTodoObj);
-    saveToDos();
-}
+    function saveToDos() {
+        localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+    }
 
-toDoForm.addEventListener("submit", handleToDoSubmit);
+    function deleteToDo(event) {
+        const li = event.target.parentElement;
+        li.remove();
+        toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
+        saveToDos();
+    }
 
-const savedToDos = localStorage.getItem(TODOS_KEY);
+    function paintToDo(newTodo) {
+        const li = document.createElement('li');
+        li.id = newTodo.id;
+        const span = document.createElement('span');
+        span.innerText = newTodo.text;
+        const button = document.createElement('button');
+        button.innerText = '❌';
+        button.addEventListener('click', deleteToDo);
+        li.appendChild(span);
+        li.appendChild(button);
+        toDoList.appendChild(li);
+    }
 
-if (savedToDos !== null) {
-    const parsedToDos = JSON.parse(savedToDos);
-    toDos = parsedToDos;
-    parsedToDos.forEach(paintToDo);
-}
+    function handleToDoSubmit(event) {
+        event.preventDefault();
+        const newTodo = toDoInput.value;
+        toDoInput.value = '';
+        const newTodoObj = {
+            text: newTodo,
+            id: Date.now(),
+        };
+        toDos.push(newTodoObj);
+        paintToDo(newTodoObj);
+        saveToDos();
+    }
 
-const liveClock = document.querySelector('.live-clock div');
+    toDoForm.addEventListener('submit', handleToDoSubmit);
 
-function updateClock() {
-    const now = new Date();
-    const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-    };
-    liveClock.textContent = now.toLocaleTimeString('en-US', options);
-}
+    const savedToDos = localStorage.getItem(TODOS_KEY);
 
-setInterval(updateClock, 1000);
+    if (savedToDos !== null) {
+        const parsedToDos = JSON.parse(savedToDos);
+        toDos = parsedToDos;
+        parsedToDos.forEach(paintToDo);
+    }
+})();

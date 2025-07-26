@@ -13,19 +13,22 @@
         <h1>Welcome to Daily Hub</h1>
     </header>
     <main>
-        <section class="live-clock">
-            <div></div>
+        <section id="clock-section">
+            <h2>실시간 시계</h2>
+            <div id="clock"></div>
         </section>
-        <section class="login-form-section">
+        <section id="login-section">
+            <h2 class="hidden">로그인</h2>
             <form id="login-form">
                 <input type="text" placeholder="What is your name?" required />
                 <button>Log In</button>
             </form>
         </section>
-        <section class="welcome-section">
+        <section id="greeting-section" class="hidden">
             <h2 id="greeting"></h2>
         </section>
-        <section class="todo-section">
+        <section id="todo-section">
+            <h2>오늘의 할 일</h2>
             <form id="todo-form">
                 <input type="text" placeholder="Write a To Do and Press Enter" required />
             </form>

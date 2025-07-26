@@ -3,7 +3,6 @@
     display: none;
 }
 
-/* Layout */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -31,38 +30,38 @@ section {
     text-align: center;
 }
 
-/* #clock-section */
-#clock {
+/* 시계 */
+.live-clock {
     font-size: 2em;
     font-weight: bold;
 }
 
-/* #login-section & #greeting-section */
-#login-form input,
-#login-form button {
+/* 로그인 폼 */
+.login-form input,
+.login-form button {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-#login-form button {
-    border: none;
-    background-color: #333;
+.login-form button {
     color: #fff;
     cursor: pointer;
+    background-color: #333;
 }
 
+/* 환영 메시지 */
 #greeting {
     font-size: 1.5em;
     font-weight: bold;
 }
 
-/* #todo-section */
+/* 투두리스트 */
 #todo-section {
     width: 300px;
 }
 
-#todo-form input {
+.todo-form input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
